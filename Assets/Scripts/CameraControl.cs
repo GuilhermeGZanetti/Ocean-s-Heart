@@ -8,7 +8,6 @@ public class CameraController2D : MonoBehaviour
     public float panSpeed = 10f;
     public MapController mapController;
     
-
     private Camera mainCamera;
     private Vector3 lastPanPosition;
     private float zoomAmount = 1f;

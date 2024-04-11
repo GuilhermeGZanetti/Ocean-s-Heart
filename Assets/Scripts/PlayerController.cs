@@ -18,12 +18,16 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update(){
         if (Input.GetMouseButtonDown(0)){
-            // Get the mouse position in world space
-            Vector3 worldPoint = cam.ScreenToWorldPoint(Input.mousePosition);
-            worldPoint.z = 0;
-            Debug.Log("World Point: " + worldPoint);
-            Debug.Log("Agent Position: " + transform.position);
-            agent.SetDestination(worldPoint);
+            //Check if clicked on a tilemap
+            RaycastHit2D hit = Physics2D.GetRayIntersection(cam.ScreenPointToRay(Input.mousePosition), 100f);
+            if (hit.transform == null){
+                // Get the mouse position in world space
+                Vector3 worldPoint = cam.ScreenToWorldPoint(Input.mousePosition);
+                worldPoint.z = 0;
+                Debug.Log("World Point: " + worldPoint);
+                Debug.Log("Agent Position: " + transform.position);
+                agent.SetDestination(worldPoint);
+            }            
         }
         
         // Check if player is moving and rotate it according to the direction of movement
@@ -37,5 +41,9 @@ public class PlayerController : MonoBehaviour
             // Rotate the player's ship to face the direction of movement
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
-    }    
+    }   
+
+    public void GoToGameObject(GameObject gameObject){
+        agent.SetDestination(gameObject.transform.position);
+    }
 }
