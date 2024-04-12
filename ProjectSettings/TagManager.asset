@@ -44,3 +44,6 @@ TagManager:
   - name: Cities
     uniqueID: 3073663829
     locked: 0
+  - name: Text
+    uniqueID: 2404575083
+    locked: 0
