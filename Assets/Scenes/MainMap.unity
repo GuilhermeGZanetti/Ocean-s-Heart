@@ -1597,8 +1597,8 @@ GameObject:
   - component: {fileID: 1095442244}
   - component: {fileID: 1095442243}
   - component: {fileID: 1095442246}
-  - component: {fileID: 1095442245}
   - component: {fileID: 1095442247}
+  - component: {fileID: 1095442245}
   m_Layer: 0
   m_Name: PlayerBoat
   m_TagString: Untagged
@@ -1687,6 +1687,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 519420031}
+  boat: {fileID: 1095442247}
 --- !u!195 &1095442246
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1721,6 +1722,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09fd3b230cba6241a932021100fb799, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  money: 1000
+  weight: 0
+  maxWeight: 10
+  baseSpeed: 1
+  speed: 0
 --- !u!1 &1131652617
 GameObject:
   m_ObjectHideFlags: 0
@@ -7253,6 +7259,7 @@ GameObject:
   - component: {fileID: 1942042462}
   - component: {fileID: 1942042461}
   - component: {fileID: 1942042463}
+  - component: {fileID: 1942042464}
   m_Layer: 0
   m_Name: City
   m_TagString: Untagged
@@ -7386,6 +7393,41 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.52
+--- !u!114 &1942042464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942042459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 565ac43d361099040b1568de03894d2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cityDataJson: {fileID: 4900000, guid: 321b71734879ee442a49e14b5d92ff85, type: 3}
+  cityName: Arlenius
+  city_funds: 1000
+  citySerializable:
+    cityName: 
+    inventory:
+      iron: 0
+      cotton: 0
+      silk: 0
+      wood: 0
+      grain: 0
+    basePrice:
+      iron: 0
+      cotton: 0
+      silk: 0
+      wood: 0
+      grain: 0
+    prices:
+      iron: 0
+      cotton: 0
+      silk: 0
+      wood: 0
+      grain: 0
 --- !u!1 &2096814795
 GameObject:
   m_ObjectHideFlags: 0
