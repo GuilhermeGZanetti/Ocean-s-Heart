@@ -49,5 +49,13 @@ public class PlayerController : MonoBehaviour
 
     public void GoToGameObject(GameObject gameObject){
         agent.SetDestination(gameObject.transform.position);
+
+        ////////////////////
+        // Trade
+        Debug.Log("Buying 1 Iron from city");
+        gameObject.GetComponent<City>().BuyItem("silk", 1, boat);
+
+        boat.PrintInventory();
+        Debug.Log("City Inventory: " + gameObject.GetComponent<City>().citySerializable.ToString());
     }
 }

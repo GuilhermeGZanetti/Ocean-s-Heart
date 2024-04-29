@@ -1,0 +1,38 @@
+{
+    "cities": [
+        {
+            "cityName": "Arlenius",
+            "inventory": {
+                "iron": 3, 
+                "cotton": 50, 
+                "silk": 20, 
+                "wood": 10, 
+                "grain": 25
+            },
+            "basePrice": {
+                "iron": 80,
+                "cotton": 20, 
+                "silk": 50,
+                "wood": 10,
+                "grain": 25
+            }
+        },
+        {
+            "cityName": "Robhamn",
+            "inventory": {
+                "iron": 15, 
+                "cotton": 10, 
+                "silk": 10, 
+                "wood": 60, 
+                "grain": 40
+            },
+            "basePrice": {
+                "iron": 60,
+                "cotton": 30, 
+                "silk": 70,
+                "wood": 5,
+                "grain": 20
+            }
+        }
+    ]
+}
