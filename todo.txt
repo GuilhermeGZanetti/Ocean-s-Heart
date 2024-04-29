@@ -1,0 +1,11 @@
+Implementar classe barco que vai ser usado to jogador que os Computadores
+
+Na classe barco na capacidade implementar é uma lista com o nome quantidade dos produtos do inventário da e bairro da cidade
+
+Da cidades instrumental sua de dados com todos os itens possíveis e o preço base daquela cidade
+
+Controle de compra e venda vai ser gerenciado no barco de seu momento de chamado cidade ponto cel e aí passa um parâmetro o jogador no caso barco o nome do produto a Quantidade
+
+No jogador vai ter uma verificação do da proximidade da cidade se ele está indo para uma cidade quando jogador chegar na cidade e irá chamar uma função de um ui
+
+Esse canva Vai receber o barco e a cidade vai exibi-lo tê-los produtos de cada um e vai gerenciar a venda chamando as funções da cidade quando necessário

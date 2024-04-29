@@ -7,16 +7,20 @@ public class PlayerController : MonoBehaviour
 {
     public Camera cam;
     NavMeshAgent agent;
+    public Boat boat;
+
 
     // Start is called before the first frame update
     void Start(){
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        agent.speed = boat.speed;
     }
 
     // Update is called once per frame
     void Update(){
+        agent.speed = boat.speed;
         if (Input.GetMouseButtonDown(0)){
             //Check if clicked on a tilemap
             RaycastHit2D hit = Physics2D.GetRayIntersection(cam.ScreenPointToRay(Input.mousePosition), 100f);
@@ -25,7 +29,7 @@ public class PlayerController : MonoBehaviour
                 Vector3 worldPoint = cam.ScreenToWorldPoint(Input.mousePosition);
                 worldPoint.z = 0;
                 Debug.Log("World Point: " + worldPoint);
-                Debug.Log("Agent Position: " + transform.position);
+                // Debug.Log("Agent Position: " + transform.position);
                 agent.SetDestination(worldPoint);
             }            
         }
