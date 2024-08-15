@@ -1,3 +1,8 @@
+Trade:
 - No jogador vai ter uma verificação do da proximidade da cidade se ele está indo para uma cidade quando jogador chegar na cidade e irá chamar uma função de um ui
-
 - Esse canva Vai receber o barco e a cidade vai exibi-lo tê-los produtos de cada um e vai gerenciar a venda chamando as funções da cidade quando necessário
+- Mudar inventário do jogador para InventorySerializable
+
+Combate:
+- Criar BoatStats em Boat para armazenar as informações do barco
+- Criar cena de combate inicializada com as informações armazenadas no GameManager battleSceneData
