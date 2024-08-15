@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public Camera cam;
     NavMeshAgent agent;
     public Boat boat;
+    [SerializeField] private MapSceneManager mapSceneManager;
 
 
     // Start is called before the first frame update
@@ -57,5 +58,18 @@ public class PlayerController : MonoBehaviour
 
         boat.PrintInventory();
         Debug.Log("City Inventory: " + gameObject.GetComponent<City>().citySerializable.ToString());
+    }
+
+    void OnTriggerEnter2D(Collider2D hitInfo)
+    {
+        Debug.Log("Entered Trigger");
+        PirateController pirate = hitInfo.GetComponent<PirateController>();
+
+        if (pirate){
+            Debug.Log("Pirate Found");
+            BoatStats[] enemiesStats = new BoatStats[]{pirate.boat.boatStats};
+            GameManager.Instance.LoadBattle(mapSceneManager, boat.boatStats, enemiesStats);
+        }
+
     }
 }

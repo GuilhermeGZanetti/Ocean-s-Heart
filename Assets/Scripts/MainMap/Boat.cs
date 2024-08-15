@@ -11,6 +11,8 @@ public class Boat: MonoBehaviour
         {"iron", 5f}, {"cotton", 1f}, {"silk", 0.5f}, {"wood", 2f}, {"grain", 1f}
     };
 
+    public BoatStats boatStats;
+
     public int money = 1000;
     public Dictionary<string, int> inventory = new Dictionary<string, int>();
     public float weight = 0.0f;
