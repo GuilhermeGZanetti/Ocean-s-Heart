@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public Camera cam;
     NavMeshAgent agent;
     public Boat boat;
+    public float agentSpeedMultiplier = 0.1f;
     [SerializeField] private MapSceneManager mapSceneManager;
 
 
@@ -16,12 +17,12 @@ public class PlayerController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
-        agent.speed = boat.speed;
+        agent.speed = boat.boatStats.speed;
     }
 
     // Update is called once per frame
     void Update(){
-        agent.speed = boat.speed;
+        agent.speed = boat.boatStats.speed * agentSpeedMultiplier;
         if (Input.GetMouseButtonDown(0)){
             //Check if clicked on a tilemap
             RaycastHit2D hit = Physics2D.GetRayIntersection(cam.ScreenPointToRay(Input.mousePosition), 100f);

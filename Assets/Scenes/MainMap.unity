@@ -1516,8 +1516,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.547, y: -0.44, z: 0.27386174}
-  m_LocalScale: {x: 0.21258, y: 0.26181, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.1, y: 0.12315835, z: 0.47041118}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 266055799}
   m_Father: {fileID: 1044455457}
@@ -1584,10 +1584,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boatStats: {fileID: 0}
   money: 1000
-  weight: 0
-  maxWeight: 10
-  baseSpeed: 1
-  speed: 0
 --- !u!195 &747381697
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1996,8 +1992,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 5.5927286, y: -2.005815, z: 0.27386174}
-  m_LocalScale: {x: 0.21258196, y: 0.2618055, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.1, y: 0.123155095, z: 0.47040683}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 985200395}
   m_Father: {fileID: 1367564230}
@@ -2016,6 +2012,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 519420031}
   boat: {fileID: 1095442247}
+  agentSpeedMultiplier: 0.1
   mapSceneManager: {fileID: 1367564229}
 --- !u!195 &1095442246
 NavMeshAgent:
@@ -2051,12 +2048,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09fd3b230cba6241a932021100fb799, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boatStats: {fileID: 0}
+  boatStats: {fileID: 11400000, guid: b11ecdbbc1cc0d44789ccf2a155a2e8f, type: 2}
   money: 1000
-  weight: 0
-  maxWeight: 10
-  baseSpeed: 1
-  speed: 0
 --- !u!70 &1095442248
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
