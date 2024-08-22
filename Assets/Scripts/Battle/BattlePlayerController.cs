@@ -7,7 +7,6 @@ public class BattlePlayerController : MonoBehaviour
 {
 
     private BattleBoat boat;
-    [SerializeField] private float rudderSpeed = 5.0f;
     [SerializeField] private float sailSpeed = 5.0f;
 
     // Start is called before the first frame update
@@ -17,16 +16,22 @@ public class BattlePlayerController : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
-        if (Input.GetAxisRaw("Horizontal") != 0) {
-            boat.rudderPosition += Input.GetAxisRaw("Horizontal") * rudderSpeed * Time.deltaTime;      
-            boat.rudderPosition = Mathf.Clamp(boat.rudderPosition, -1.0f, 1.0f);  
-        }
-
+        boat.SetTargetRudderPosition(Input.GetAxisRaw("Horizontal"), Time.deltaTime);
         if (Input.GetAxisRaw("Vertical") != 0) {
-            boat.sailStatus += Input.GetAxisRaw("Vertical") * sailSpeed * Time.deltaTime;     
-            boat.sailStatus = Mathf.Clamp(boat.sailStatus, 0.0f, 1.0f);   
+            boat.ChangeSailStatus(Input.GetAxisRaw("Vertical") * sailSpeed * Time.deltaTime);
+        }
+        if (Input.GetButtonDown("Fire1")) {
+            boat.ShootCanons(new Vector2(1, 0));
+        }
+        if (Input.GetButtonDown("Fire2")) {
+            boat.ShootCanons(new Vector2(-1, 0));
         }
     }   
+
+
+    public BoatStats GetBoatStats(){
+        return boat.boatStats;
+    }
 
 
 

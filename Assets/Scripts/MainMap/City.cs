@@ -25,16 +25,16 @@ public class City : MonoBehaviour
 
     public void SellItem(string item, int quantity, Boat boat)
     {
-        if (boat.money < citySerializable.GetPrice(item) * quantity)
+        if (boat.gold < citySerializable.GetPrice(item) * quantity)
         {
-            Debug.Log("Not enough money to sell " + item);
+            Debug.Log("Not enough gold to sell " + item);
             return;
         }
         if (citySerializable.GetQuantity(item) >= quantity)
         {
             citySerializable.ChangeQuantity(item, -quantity);
             boat.inventory[item] += quantity;
-            boat.money -= citySerializable.GetPrice(item) * quantity;
+            boat.gold -= citySerializable.GetPrice(item) * quantity;
             city_funds += citySerializable.GetPrice(item) * quantity;
         }
         else
@@ -55,7 +55,7 @@ public class City : MonoBehaviour
             citySerializable.ChangeQuantity(item, quantity);
             boat.inventory[item] -= quantity;
             city_funds -= citySerializable.GetPrice(item) * quantity;
-            boat.money += citySerializable.GetPrice(item) * quantity;
+            boat.gold += citySerializable.GetPrice(item) * quantity;
         }
         else
         {

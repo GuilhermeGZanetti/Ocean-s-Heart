@@ -5,13 +5,34 @@ using UnityEngine;
 public class BattleSceneManager : MonoBehaviour
 {
     private BattleSceneData battleSceneData;
+
+
+    [SerializeField] private BattlePlayerController player;
+    private List<GameObject> enemies;
+
+
+    private float looted_gold = 0;
+
     // Start is called before the first frame update
     void Start()
     {
+        looted_gold = 0;
         Time.timeScale = 1f;
 
         //Read battle info from GameManager
         battleSceneData = GameManager.Instance.battleSceneData;
+        Debug.Log("BattleSceneData: " + battleSceneData);
+        Debug.Log("MapSceneManager from gm: " + GameManager.Instance.mapSceneManager);
+    }
+
+    // Called after Start()
+    void OnEnable(){
+        //Load enemies
+        enemies = new List<GameObject>
+        {
+            // Get gameObject by name
+            GameObject.Find("Pirate")
+        };
     }
 
     // Update is called once per frame
@@ -20,7 +41,46 @@ public class BattleSceneManager : MonoBehaviour
         
     }
 
+    public void BoatDestroyed(GameObject destroyedBoat){
+        if (destroyedBoat.tag == "Player"){
+            MapSceneData mapSceneData = new MapSceneData
+            {
+                playerLostBattle = true,
+                looted_gold = 0,
+                loot = new InventorySerializable(),
+                playerStats = destroyedBoat.GetComponent<BattleBoat>().boatStats
+            };
+
+            ReturnFromBattle(mapSceneData);
+        } else {
+            // Remove enemy from enemies list
+            Debug.Log("Enemy destroyed: " + destroyedBoat.name);
+            Debug.Log("Destroyed obj: " + destroyedBoat);
+            Debug.Log("Enemies: " + enemies);
+            Debug.Log("Enemy: " + enemies[0]);
+
+            enemies.Remove(destroyedBoat);
+            looted_gold += destroyedBoat.GetComponent<BattleBoat>().GetLootedGold();
+            Debug.Log("Enemies: " + enemies.Count);
+
+            // Check if all enemies are destroyed
+            if (enemies.Count == 0){
+                // Load MapScene
+                MapSceneData mapSceneData = new MapSceneData
+                {
+                    playerLostBattle = false,
+                    looted_gold = looted_gold,
+                    loot = new InventorySerializable(),
+                    playerStats = player.GetBoatStats()
+                };
+                ReturnFromBattle(mapSceneData);
+            };
+        }
+        
+    }
+
     public void ReturnFromBattle(MapSceneData mapSceneData){
         // Load data to be passed to mapscene
+        GameManager.Instance.LoadMap(mapSceneData);
     }
 }

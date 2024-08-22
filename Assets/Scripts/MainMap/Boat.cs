@@ -11,14 +11,16 @@ public class Boat: MonoBehaviour
         {"iron", 5f}, {"cotton", 1f}, {"silk", 0.5f}, {"wood", 2f}, {"grain", 1f}
     };
 
+    public ScriptableBoatStats baseStats;
     public BoatStats boatStats;
 
-    public int money = 1000;
+    public int gold = 1000;
     public Dictionary<string, int> inventory = new Dictionary<string, int>();
 
     void Start(){
+        boatStats = baseStats.baseStats;
         //Based on the base speed, weight and max weight, calculate speed
-        boatStats.speed = boatStats.baseSpeed + (boatStats.maxWeight - boatStats.weight)/(2*boatStats.maxWeight);
+        boatStats.speed = baseStats.baseStats.speed + (boatStats.maxWeight - boatStats.weight)/(2*boatStats.maxWeight);
 
         inventory = new Dictionary<string, int>(){ {"iron", 0}, {"cotton", 10}, {"silk", 2}, {"wood", 0}, {"grain", 3} }; 
         PrintInventory();

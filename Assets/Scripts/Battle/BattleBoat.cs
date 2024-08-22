@@ -6,13 +6,17 @@ using UnityEngine;
 
 public class BattleBoat: MonoBehaviour
 {
+    [SerializeField] private BattleSceneManager battleSceneManager;
+    public ScriptableBoatStats scriptableBoatStats;
     public BoatStats boatStats;
+
+    public GameObject cannonPrefab;
     
 
     public float sailStatus = 0.0f; // 0.0 to 1.0
     public float rudderPosition = 0.0f; // -1.0 to 1.0
 
-    public float baseForce = 1.0f;
+    public float baseForce = 0.3f;
     public float rotationSpeed = 2.0f; // Speed at which the boat rotates towards its target direction
     public float rudderEffect = 6f;
 
@@ -21,8 +25,9 @@ public class BattleBoat: MonoBehaviour
     private Rigidbody2D rb;
 
     void Start(){
+        boatStats = scriptableBoatStats.baseStats;
         //Based on the base speed, weight and max weight, calculate speed
-        boatStats.speed = boatStats.baseSpeed + (boatStats.maxWeight - boatStats.weight)/(2*boatStats.maxWeight);
+        boatStats.speed = scriptableBoatStats.baseStats.speed + (boatStats.maxWeight - boatStats.weight)/(2*boatStats.maxWeight);
 
         rb = GetComponent<Rigidbody2D>();
     }
@@ -54,5 +59,42 @@ public class BattleBoat: MonoBehaviour
 
             rb.rotation = newAngle; // Set the Rigidbody2D's rotation
         }
+    }
+
+    public void SetTargetRudderPosition(float target_pos, float deltaTime){
+        target_pos = Mathf.Clamp(target_pos, -1.0f, 1.0f);  
+        // Lerp rudder position towards target position
+        rudderPosition = Mathf.Lerp(rudderPosition, target_pos, deltaTime*boatStats.manuverability);
+    }
+
+    public void ChangeSailStatus(float delta_pos){
+        sailStatus += delta_pos;
+        sailStatus = Mathf.Clamp(sailStatus, 0.0f, 1.0f);
+    }
+
+    public void TakeDamage(float damage){
+        boatStats.hp -= damage;
+        if (boatStats.hp <= 0.0f){
+            Debug.Log("Boat Destroyed");
+            battleSceneManager.BoatDestroyed(gameObject);
+            Destroy(gameObject);
+        }
+    }
+
+    public void ShootCanons(Vector2 direction){
+        for (int i = 0; i < boatStats.num_canons; i++){
+             // Calculate the angle between the boat's forward direction (up in local space) and the direction vector
+            float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+            // Create a rotation based on this angle
+            Quaternion ballRotation = Quaternion.Euler(0, 0, angle) * transform.rotation;
+
+            // Instantiate the cannonball with the calculated rotation
+            GameObject cannon = GameObject.Instantiate(cannonPrefab, transform.position, ballRotation);
+            cannon.GetComponent<CannonBall>().Init(gameObject.name);
+        }
+    }
+
+    public float GetLootedGold(){
+        return scriptableBoatStats.lootable_gold;
     }
 }

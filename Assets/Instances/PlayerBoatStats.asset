@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1d3b97d58365b9468406b28cedf16b6, type: 3}
   m_Name: PlayerBoatStats
   m_EditorClassIdentifier: 
-  hp: 100
-  baseSpeed: 1
-  speed: 1
-  num_canons: 1
-  weight: 0
-  maxWeight: 10
+  baseStats:
+    hp: 100
+    speed: 1
+    manuverability: 5
+    num_canons: 1
+    weight: 0
+    maxWeight: 10

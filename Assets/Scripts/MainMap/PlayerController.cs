@@ -69,8 +69,16 @@ public class PlayerController : MonoBehaviour
         if (pirate){
             Debug.Log("Pirate Found");
             BoatStats[] enemiesStats = new BoatStats[]{pirate.boat.boatStats};
+            // Destroy the pirate
+            Destroy(pirate.gameObject);
+
+            // Load the battle scene
             GameManager.Instance.LoadBattle(mapSceneManager, boat.boatStats, enemiesStats);
         }
 
+    }
+
+    public void GetGold(int amount){
+        boat.gold += amount;
     }
 }

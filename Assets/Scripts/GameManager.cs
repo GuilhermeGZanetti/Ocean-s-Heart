@@ -35,24 +35,31 @@ public class GameManager : MonoBehaviour
     public void LoadBattle(MapSceneManager mapSceneManager, BoatStats playerStats, BoatStats[] enemiesStats){
 
         // Load data to be passed to battlescene
-        BattleSceneData battleSceneData = ScriptableObject.CreateInstance<BattleSceneData>();
-        battleSceneData.playerStats = playerStats;
-        battleSceneData.enemiesStats = enemiesStats;
+        Instance.battleSceneData = new BattleSceneData
+        {
+            playerStats = playerStats,
+            enemiesStats = enemiesStats
+        };
+        Instance.mapSceneManager = mapSceneManager;
 
         // Load Battle Scene additivelly
         SceneManager.LoadSceneAsync(SceneNames.BattleScene.ToString(), LoadSceneMode.Additive);
 
         // Deactivate MapScene SceneManager game object
-        mapSceneManager.gameObject.SetActive(false);
+        Debug.Log("MapSceneManager: " + Instance.mapSceneManager);
+        Instance.mapSceneManager.gameObject.SetActive(false);
+        Debug.Log("Instance.MapSceneManager: " + Instance.mapSceneManager);
     }
 
     public void LoadMap(MapSceneData mapSceneData){
+        Debug.Log("Loading Map Scene");
+
         // Unload Battle Scene if it is loaded
         SceneManager.UnloadSceneAsync(SceneNames.BattleScene.ToString());
 
         // Reactivate MapScene SceneManager game object
-        mapSceneManager.gameObject.SetActive(true);
-        mapSceneManager.ReturnFromBattle(mapSceneData);        
+        Instance.mapSceneManager.gameObject.SetActive(true);
+        Instance.mapSceneManager.ReturnFromBattle(mapSceneData);        
     }
 }
 

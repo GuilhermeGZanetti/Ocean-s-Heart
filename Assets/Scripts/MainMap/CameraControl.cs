@@ -10,13 +10,14 @@ public class CameraController2D : MonoBehaviour
     
     private Camera mainCamera;
     private Vector3 lastPanPosition;
-    private float zoomAmount = 1f;
-    private float initOrthographicSize;
+    [SerializeField] private float zoomAmount = 1f;
+    [SerializeField] private float maxOrthographicSize;
 
     private void Start()
     {
         mainCamera = GetComponent<Camera>();
-        initOrthographicSize = mainCamera.orthographicSize;
+        ZoomCamera(0);
+        // maxOrthographicSize = mainCamera.orthographicSize;
     }
 
     private void Update()
@@ -45,7 +46,7 @@ public class CameraController2D : MonoBehaviour
         zoomAmount = Mathf.Clamp(zoomAmount, 1.0f, 5f); // Limit zoom amount if needed
 
         //Set camera transform z to zoomAmount
-        mainCamera.orthographicSize = initOrthographicSize/zoomAmount;
+        mainCamera.orthographicSize = maxOrthographicSize/zoomAmount;
     }
 
     private void PanCamera()
