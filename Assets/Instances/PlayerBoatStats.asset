@@ -19,3 +19,7 @@ MonoBehaviour:
     num_canons: 1
     weight: 0
     maxWeight: 10
+    cooldown: 1
+  lootable_gold: 0
+  num_ships: 1
+  boatPrefab: {fileID: 0}

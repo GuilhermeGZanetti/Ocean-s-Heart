@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     public BattleSceneData battleSceneData = null;
 
-    public void LoadBattle(MapSceneManager mapSceneManager, BoatStats playerStats, BoatStats[] enemiesStats){
+    public void LoadBattle(MapSceneManager mapSceneManager, BoatStats playerStats, ScriptableBoatStats[] enemiesStats){
 
         // Load data to be passed to battlescene
         Instance.battleSceneData = new BattleSceneData

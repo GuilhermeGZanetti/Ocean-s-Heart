@@ -20,6 +20,9 @@ public class BattleBoat: MonoBehaviour
     public float rotationSpeed = 2.0f; // Speed at which the boat rotates towards its target direction
     public float rudderEffect = 6f;
 
+    private float leftCannonCooldown = 0.0f;
+    private float rightCannonCooldown = 0.0f;
+
 
 
     private Rigidbody2D rb;
@@ -30,6 +33,18 @@ public class BattleBoat: MonoBehaviour
         boatStats.speed = scriptableBoatStats.baseStats.speed + (boatStats.maxWeight - boatStats.weight)/(2*boatStats.maxWeight);
 
         rb = GetComponent<Rigidbody2D>();
+
+        //Get battle scene manager
+        battleSceneManager = GameObject.Find("SceneManager").GetComponent<BattleSceneManager>();
+    }
+
+    void Update(){
+        if (leftCannonCooldown > 0.0f){
+            leftCannonCooldown -= Time.deltaTime;
+        }
+        if (rightCannonCooldown > 0.0f){
+            rightCannonCooldown -= Time.deltaTime;
+        }
     }
 
     void FixedUpdate(){
@@ -82,14 +97,36 @@ public class BattleBoat: MonoBehaviour
     }
 
     public void ShootCanons(Vector2 direction){
+        bool canShoot = false;
+        if (direction.x > 0 && leftCannonCooldown <= 0.0f){
+            leftCannonCooldown = scriptableBoatStats.baseStats.cooldown;
+            canShoot = true;
+        } else if (direction.x < 0 && rightCannonCooldown <= 0.0f){
+            rightCannonCooldown = scriptableBoatStats.baseStats.cooldown;
+            canShoot = true;
+        }
+        if(!canShoot){
+            return;
+        }
         for (int i = 0; i < boatStats.num_canons; i++){
-             // Calculate the angle between the boat's forward direction (up in local space) and the direction vector
+            // Calculate the angle between the boat's forward direction (up in local space) and the direction vector
             float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
             // Create a rotation based on this angle
             Quaternion ballRotation = Quaternion.Euler(0, 0, angle) * transform.rotation;
+            
+            // Calculate cannonball position
+            float x = 0f;
+            if (boatStats.num_canons == 1){
+                x = 0f;
+            } else {
+                x = (-2/(1-boatStats.num_canons)*i - 1)*0.5f;
+            }
+            Vector3 cannonPos = new Vector3(0, x, 0);
+            // Transform cannonPos to world space
+            cannonPos = transform.TransformPoint(cannonPos);
 
             // Instantiate the cannonball with the calculated rotation
-            GameObject cannon = GameObject.Instantiate(cannonPrefab, transform.position, ballRotation);
+            GameObject cannon = Instantiate(cannonPrefab, cannonPos, ballRotation);
             cannon.GetComponent<CannonBall>().Init(gameObject.name);
         }
     }

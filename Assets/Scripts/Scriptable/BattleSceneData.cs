@@ -5,5 +5,5 @@ using UnityEngine;
 public class BattleSceneData
 {
     public BoatStats playerStats;
-    public BoatStats[] enemiesStats;
+    public ScriptableBoatStats[] enemiesStats;
 }

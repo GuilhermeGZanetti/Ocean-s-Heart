@@ -8,6 +8,7 @@ public class BattleSceneManager : MonoBehaviour
 
 
     [SerializeField] private BattlePlayerController player;
+    [SerializeField] private float enemy_spacing = 1f;
     private List<GameObject> enemies;
 
 
@@ -22,17 +23,17 @@ public class BattleSceneManager : MonoBehaviour
         //Read battle info from GameManager
         battleSceneData = GameManager.Instance.battleSceneData;
         Debug.Log("BattleSceneData: " + battleSceneData);
-        Debug.Log("MapSceneManager from gm: " + GameManager.Instance.mapSceneManager);
-    }
 
-    // Called after Start()
-    void OnEnable(){
         //Load enemies
-        enemies = new List<GameObject>
-        {
-            // Get gameObject by name
-            GameObject.Find("Pirate")
-        };
+        enemies = new List<GameObject>();
+
+        float i = -battleSceneData.enemiesStats.Length/2*enemy_spacing;
+        foreach (ScriptableBoatStats enemyStats in battleSceneData.enemiesStats){
+            GameObject enemy = Instantiate(enemyStats.boatPrefab, new Vector3(i, 3.0f, 0.27f), Quaternion.identity);
+            enemy.GetComponent<BattleBoat>().boatStats = enemyStats.baseStats;
+            enemies.Add(enemy);
+            i += enemy_spacing;
+        }
     }
 
     // Update is called once per frame

@@ -7,6 +7,8 @@ public class ScriptableBoatStats : ScriptableObject
 {
     public BoatStats baseStats;
     public float lootable_gold;
+    public int num_ships;
+    public GameObject boatPrefab;
 }
 
 
@@ -19,4 +21,5 @@ public struct BoatStats{
 
     public float weight;
     public float maxWeight;
+    public float cooldown;
 }

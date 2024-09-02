@@ -68,7 +68,11 @@ public class PlayerController : MonoBehaviour
 
         if (pirate){
             Debug.Log("Pirate Found");
-            BoatStats[] enemiesStats = new BoatStats[]{pirate.boat.boatStats};
+            int num_enemies = pirate.boat.baseStats.num_ships;
+            ScriptableBoatStats[] enemiesStats = new ScriptableBoatStats[num_enemies];
+            for(int i = 0; i < num_enemies; i++){
+                enemiesStats[i] = pirate.boat.baseStats;
+            }
             // Destroy the pirate
             Destroy(pirate.gameObject);
 
