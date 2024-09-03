@@ -29,8 +29,12 @@ public class BattleSceneManager : MonoBehaviour
 
         float i = -battleSceneData.enemiesStats.Length/2*enemy_spacing;
         foreach (ScriptableBoatStats enemyStats in battleSceneData.enemiesStats){
-            GameObject enemy = Instantiate(enemyStats.boatPrefab, new Vector3(i, 3.0f, 0.27f), Quaternion.identity);
+            // Instantiate as child of Game Object with name Pirates
+            Quaternion enemyRotation = Quaternion.Euler(0, 0, 180) * transform.rotation;
+            GameObject enemy = Instantiate(enemyStats.boatPrefab, new Vector3(i, 3.0f, 0.27f), enemyRotation);
+            enemy.transform.parent = GameObject.Find("Pirates").transform;
             enemy.GetComponent<BattleBoat>().boatStats = enemyStats.baseStats;
+            enemy.GetComponent<BattleEnemyController>().playerBoat = player;
             enemies.Add(enemy);
             i += enemy_spacing;
         }
@@ -62,6 +66,7 @@ public class BattleSceneManager : MonoBehaviour
 
             enemies.Remove(destroyedBoat);
             looted_gold += destroyedBoat.GetComponent<BattleBoat>().GetLootedGold();
+            Destroy(destroyedBoat);
             Debug.Log("Enemies: " + enemies.Count);
 
             // Check if all enemies are destroyed
@@ -83,5 +88,16 @@ public class BattleSceneManager : MonoBehaviour
     public void ReturnFromBattle(MapSceneData mapSceneData){
         // Load data to be passed to mapscene
         GameManager.Instance.LoadMap(mapSceneData);
+    }
+
+    public Vector3 GetCentralizedPosition(){
+        // Return the mean position of all enemies and player
+        Vector3 mean = new Vector3(0, 0, 0);
+        foreach (GameObject enemy in enemies){
+            mean += enemy.transform.position;
+        }
+        mean += player.transform.position;
+        mean /= enemies.Count + 1;
+        return mean;
     }
 }

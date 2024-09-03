@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2777132152930397205}
   - component: {fileID: 6296619352236774482}
   - component: {fileID: 7729743623405208166}
+  - component: {fileID: 9080811066901318211}
   m_Layer: 0
   m_Name: BattlePirate
   m_TagString: Enemy
@@ -109,12 +110,13 @@ MonoBehaviour:
     num_canons: 0
     weight: 0
     maxWeight: 0
+    cooldown: 0
   cannonPrefab: {fileID: 2664962957221353905, guid: 7b9a6b19675efa14792524180c936d40, type: 3}
   sailStatus: 0
   rudderPosition: 0
-  baseForce: 1
-  rotationSpeed: 2
-  rudderEffect: 6
+  baseForce: 0.1
+  rotationSpeed: 4
+  rudderEffect: 60
 --- !u!70 &6296619352236774482
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -144,7 +146,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -163,8 +165,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDrag: 0.3
+  m_AngularDrag: 0.5
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -177,6 +179,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &9080811066901318211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4654083688597509747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c7f72456873484d8afd87c672f112f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerBoat: {fileID: 0}
+  boat: {fileID: 2777132152930397205}
+  currentState: 0
 --- !u!1 &6513007424013686884
 GameObject:
   m_ObjectHideFlags: 0

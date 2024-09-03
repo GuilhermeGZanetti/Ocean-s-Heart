@@ -92,7 +92,6 @@ public class BattleBoat: MonoBehaviour
         if (boatStats.hp <= 0.0f){
             Debug.Log("Boat Destroyed");
             battleSceneManager.BoatDestroyed(gameObject);
-            Destroy(gameObject);
         }
     }
 
@@ -127,6 +126,7 @@ public class BattleBoat: MonoBehaviour
 
             // Instantiate the cannonball with the calculated rotation
             GameObject cannon = Instantiate(cannonPrefab, cannonPos, ballRotation);
+            cannon.transform.parent = gameObject.transform;
             cannon.GetComponent<CannonBall>().Init(gameObject.name);
         }
     }

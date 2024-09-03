@@ -3,6 +3,10 @@ Trade:
 - Esse canva Vai receber o barco e a cidade vai exibi-lo tê-los produtos de cada um e vai gerenciar a venda chamando as funções da cidade quando necessário
 - Mudar inventário do jogador para InventorySerializable
 
-Combate:
-- Criar BoatStats em Boat para armazenar as informações do barco
-- Criar cena de combate inicializada com as informações armazenadas no GameManager battleSceneData
+Mundo:
+- Spawnar os inimigos de forma aleatória pelo mapa
+- Lógica simples nos piratas para seguirem jogador próximo
+
+Polish:
+- Criar tela de loading entre mapa e batalha
+- Criar menu principal para iniciar jogo / Tela de Game Over

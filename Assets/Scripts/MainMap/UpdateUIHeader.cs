@@ -6,6 +6,9 @@ using UnityEngine;
 public class UpdateUIHeader : MonoBehaviour
 {
     public TextMeshProUGUI speed_value;
+    public TextMeshProUGUI gold_value;
+    public PlayerController player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,5 +20,6 @@ public class UpdateUIHeader : MonoBehaviour
     {
         // Set text to Time.timeScale
         speed_value.text = Time.timeScale.ToString() + "x";
+        gold_value.text = player.boat.gold.ToString();
     }
 }
