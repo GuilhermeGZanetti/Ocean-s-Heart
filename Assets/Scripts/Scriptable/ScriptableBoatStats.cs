@@ -18,8 +18,9 @@ public struct BoatStats{
     public float speed;
     public float manuverability;
     public int num_canons;
+    public float maxWeight;
+    public float visibility;
 
     public float weight;
-    public float maxWeight;
     public float cooldown;
 }

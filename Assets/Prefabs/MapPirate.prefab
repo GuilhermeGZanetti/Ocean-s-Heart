@@ -115,7 +115,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 5.095, y: -1.699, z: 0.27386174}
-  m_LocalScale: {x: 0.25, y: 0.30789587, z: 1.176028}
+  m_LocalScale: {x: 0.1, y: 0.12315835, z: 0.4704112}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6723677688094963477}
@@ -180,7 +180,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4830319966763521530}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.1
   m_Speed: 0.5
@@ -215,6 +215,7 @@ MonoBehaviour:
     num_canons: 0
     weight: 0
     maxWeight: 0
+    cooldown: 0
   gold: 1000
 --- !u!70 &3727582781640752649
 CapsuleCollider2D:
@@ -264,3 +265,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boat: {fileID: 3529683647265454703}
+  agentSpeedMultiplier: 0.1

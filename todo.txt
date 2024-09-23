@@ -4,8 +4,13 @@ Trade:
 - Mudar inventário do jogador para InventorySerializable
 
 Mundo:
-- Spawnar os inimigos de forma aleatória pelo mapa
-- Lógica simples nos piratas para seguirem jogador próximo
+- Spawnar piratas de maneira mais uniforme
+- Colocar nível dos piratas em cima
+- Criar mais cidades
+
+Upgrade:
+- Ao chegar na cidade, ficar seguro dos piratas
+- Abrir menu de upgrade dos status do jogador
 
 Polish:
 - Criar tela de loading entre mapa e batalha

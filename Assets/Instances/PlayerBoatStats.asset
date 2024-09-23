@@ -17,8 +17,9 @@ MonoBehaviour:
     speed: 1
     manuverability: 5
     num_canons: 1
-    weight: 0
     maxWeight: 10
+    visibility: 4
+    weight: 0
     cooldown: 1
   lootable_gold: 0
   num_ships: 1
