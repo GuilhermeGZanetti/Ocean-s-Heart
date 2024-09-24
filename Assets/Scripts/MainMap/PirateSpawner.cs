@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class PirateSpawner : MonoBehaviour
 {
+    [SerializeField] private MapSceneManager mapSceneManager;
     [SerializeField] private MapController mapController;
     [SerializeField] private GameObject mapPiratePrefab;
     [SerializeField] private PlayerController player;
+
 
     // Spawning parameters
     [SerializeField] private int maxPirates;          // Max number of pirates alive at the same time
     [SerializeField] private float spawnInterval;   // Time interval between pirate spawns
     [SerializeField] private float playerSpawnRadius; 
+    [SerializeField] private int maxLevel;
+
     private float spawnTimer;
     private List<GameObject> spawnedPirates = new List<GameObject>();
 
@@ -65,6 +69,12 @@ public class PirateSpawner : MonoBehaviour
         GameObject newPirate = Instantiate(mapPiratePrefab, spawnPosition, Quaternion.identity);
         spawnedPirates.Add(newPirate);
         newPirate.transform.parent = transform;
+        int days = mapSceneManager.GetDaysPassed();
+        // Chose a randomly a level based on the number of days passed
+        int level = (int)Random.Range(1f, (float)(days + 3)/4);
+        if (level < 1) { level = 1; }
+        if (level > maxLevel) { level = maxLevel; }
+        newPirate.GetComponent<Boat>().SetLevel(level);
     }
 
     // Remove pirates from the list that have been destroyed (null references)

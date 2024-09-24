@@ -4,8 +4,6 @@ Trade:
 - Mudar inventário do jogador para InventorySerializable
 
 Mundo:
-- Spawnar piratas de maneira mais uniforme
-- Colocar nível dos piratas em cima
 - Criar mais cidades
 
 Upgrade:

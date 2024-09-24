@@ -22,7 +22,7 @@ public class BattleSceneManager : MonoBehaviour
 
         //Read battle info from GameManager
         battleSceneData = GameManager.Instance.battleSceneData;
-        Debug.Log("BattleSceneData: " + battleSceneData);
+        Debug.Log("BattleSceneData: " + battleSceneData.ToString());
 
         //Load enemies
         enemies = new List<GameObject>();
@@ -33,7 +33,7 @@ public class BattleSceneManager : MonoBehaviour
             Quaternion enemyRotation = Quaternion.Euler(0, 0, 180) * transform.rotation;
             GameObject enemy = Instantiate(enemyStats.boatPrefab, new Vector3(i, 3.0f, 0.27f), enemyRotation);
             enemy.transform.parent = GameObject.Find("Pirates").transform;
-            enemy.GetComponent<BattleBoat>().boatStats = enemyStats.baseStats;
+            enemy.GetComponent<BattleBoat>().SetBoatStats(enemyStats);
             enemy.GetComponent<BattleEnemyController>().playerBoat = player;
             enemies.Add(enemy);
             i += enemy_spacing;

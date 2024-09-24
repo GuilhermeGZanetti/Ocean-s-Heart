@@ -18,10 +18,12 @@ public class MapController : MonoBehaviour
             Debug.LogError("Could not find Ocean tilemap!");
         }
 
-        tilemapLand = transform.Find("Land").GetComponent<Tilemap>();
-        if (tilemapLand == null)
+        Transform land = transform.Find("Land");
+        if (land == null)
         {
-            Debug.LogError("Could not find Land tilemap!");
+            Debug.Log("Could not find Land tilemap!");
+        } else {
+            tilemapLand = land.GetComponent<Tilemap>();
         }
 
         //Set mapSize equal to the tilemap size

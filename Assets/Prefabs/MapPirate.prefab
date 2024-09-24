@@ -207,14 +207,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09fd3b230cba6241a932021100fb799, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  possiblePirates:
+  - {fileID: 11400000, guid: 95983df5703e33c41b52daca1d496285, type: 2}
+  - {fileID: 11400000, guid: 787011935258269498470d4cb822eacd, type: 2}
+  - {fileID: 11400000, guid: 668807f4632eee143a619255d5ea1cea, type: 2}
+  - {fileID: 11400000, guid: 3b016bb023b416843917dac34445b9f2, type: 2}
   baseStats: {fileID: 11400000, guid: 13d35bbf17c0fb344a25ccbe67516e24, type: 2}
   boatStats:
     hp: 0
     speed: 0
     manuverability: 0
     num_canons: 0
-    weight: 0
     maxWeight: 0
+    visibility: 0
+    weight: 0
     cooldown: 0
   gold: 1000
 --- !u!70 &3727582781640752649
@@ -266,3 +272,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boat: {fileID: 3529683647265454703}
   agentSpeedMultiplier: 0.1
+  floatingTextPrefab: {fileID: 2636559501705731009, guid: 387ebec0b0483ad46b999833a30d9d3f, type: 3}

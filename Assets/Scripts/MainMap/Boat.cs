@@ -11,6 +11,7 @@ public class Boat: MonoBehaviour
         {"iron", 5f}, {"cotton", 1f}, {"silk", 0.5f}, {"wood", 2f}, {"grain", 1f}
     };
 
+    public ScriptableBoatStats[] possiblePirates;
     public ScriptableBoatStats baseStats;
     public BoatStats boatStats;
 
@@ -34,5 +35,17 @@ public class Boat: MonoBehaviour
         }
 
         Debug.Log(message);
+    }
+
+    public void SetLevel(int level){
+        ScriptableBoatStats scriptableBoatStats = possiblePirates[level - 1];
+        if (scriptableBoatStats == null){
+            Debug.Log("Error: ScriptableBoatStats not found");
+            return;
+        }
+        baseStats = scriptableBoatStats;
+        boatStats = scriptableBoatStats.baseStats;
+        boatStats.speed = baseStats.baseStats.speed + (boatStats.maxWeight - boatStats.weight)/(2*boatStats.maxWeight);
+        Debug.Log("Pirate Base Stats: " + baseStats.ToString());
     }
 }

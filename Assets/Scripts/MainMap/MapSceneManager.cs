@@ -6,6 +6,9 @@ public class MapSceneManager : MonoBehaviour
 {
     public float speed_up = 4f;
     [SerializeField] private PlayerController player;
+    [SerializeField] private float dayDuration;
+
+    private float daysPassed = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +32,12 @@ public class MapSceneManager : MonoBehaviour
         {
             Time.timeScale = speed_up;
         }
+
+        daysPassed += Time.deltaTime/dayDuration;
+    }
+
+    public int GetDaysPassed(){
+        return (int)daysPassed;
     }
 
     public void ReturnFromBattle(MapSceneData mapSceneData){

@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public float agentSpeedMultiplier = 0.1f;
     [SerializeField] private MapSceneManager mapSceneManager;
 
+    private GameObject targetGameObject = null;
+
 
     // Start is called before the first frame update
     void Start(){
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour
     void Update(){
         agent.speed = boat.boatStats.speed * agentSpeedMultiplier;
         if (Input.GetMouseButtonDown(0)){
+            targetGameObject = null;
             //Check if clicked on a tilemap
             RaycastHit2D hit = Physics2D.GetRayIntersection(cam.ScreenPointToRay(Input.mousePosition), 100f);
             if (hit.transform == null){
@@ -33,22 +36,29 @@ public class PlayerController : MonoBehaviour
                 // Debug.Log("World Point: " + worldPoint);
                 // Debug.Log("Agent Position: " + transform.position);
                 agent.SetDestination(worldPoint);
-            }            
+            } else if (hit.transform.gameObject.GetComponent<PirateController>()){
+                GoToGameObject(hit.transform.gameObject);
+            }
+        } else {
+            if (targetGameObject != null){
+                agent.SetDestination(targetGameObject.transform.position);
+            }
         }
         
         TurnTowardsMovement();
     }   
 
-    public void GoToGameObject(GameObject gameObject){
-        agent.SetDestination(gameObject.transform.position);
+    public void GoToGameObject(GameObject gameObjectTarget){
+        targetGameObject = gameObjectTarget;
+        agent.SetDestination(targetGameObject.transform.position);
 
         ////////////////////
-        // Trade
-        Debug.Log("Buying 1 Iron from city");
-        gameObject.GetComponent<City>().BuyItem("silk", 1, boat);
+        // // Trade
+        // Debug.Log("Buying 1 Iron from city");
+        // gameObjectTarget.GetComponent<City>().BuyItem("silk", 1, boat);
 
-        boat.PrintInventory();
-        Debug.Log("City Inventory: " + gameObject.GetComponent<City>().citySerializable.ToString());
+        // boat.PrintInventory();
+        // Debug.Log("City Inventory: " + gameObjectTarget.GetComponent<City>().citySerializable.ToString());
     }
 
     void OnTriggerEnter2D(Collider2D hitInfo)

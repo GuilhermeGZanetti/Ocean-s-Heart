@@ -29,6 +29,9 @@ public class BattleEnemyController : MonoBehaviour
     private float chaseRandomness;
     private float attackRandomness;
 
+    public GameObject floatingTextPrefab; // Assign your FloatingText prefab here
+    private GameObject floatingTextInstance;
+
     void Start()
     {
         currentState = State.Patrol;
@@ -37,6 +40,15 @@ public class BattleEnemyController : MonoBehaviour
         // Initialize randomness factors
         chaseRandomness = UnityEngine.Random.Range(0.9f, 1.1f);
         attackRandomness = UnityEngine.Random.Range(0.8f, 1.2f);
+
+        // Instantiate the floating text
+        floatingTextInstance = Instantiate(floatingTextPrefab);
+        // Set the target (enemy boat) to follow
+        FloatingTextController floatingTextController = floatingTextInstance.GetComponent<FloatingTextController>();
+        floatingTextController.SetTarget(transform);
+        // Optional: Set custom text (e.g., health, name, etc.)
+        floatingTextController.SetText("Level "+boat.scriptableBoatStats.level.ToString());
+        floatingTextController.transform.SetParent(transform.parent);
     }
 
     void Update()

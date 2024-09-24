@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d3b97d58365b9468406b28cedf16b6, type: 3}
+  m_Name: PirateBoatStats4
+  m_EditorClassIdentifier: 
+  baseStats:
+    hp: 150
+    speed: 0.7
+    manuverability: 3
+    num_canons: 4
+    maxWeight: 10
+    visibility: 1
+    weight: 0
+    cooldown: 1
+  level: 1
+  lootable_gold: 400
+  num_ships: 1
+  boatPrefab: {fileID: 4654083688597509747, guid: 60646df41e6e2784193a8124391d49b4, type: 3}

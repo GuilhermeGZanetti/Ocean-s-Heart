@@ -108,8 +108,9 @@ MonoBehaviour:
     speed: 0
     manuverability: 0
     num_canons: 0
-    weight: 0
     maxWeight: 0
+    visibility: 0
+    weight: 0
     cooldown: 0
   cannonPrefab: {fileID: 2664962957221353905, guid: 7b9a6b19675efa14792524180c936d40, type: 3}
   sailStatus: 0
@@ -194,6 +195,7 @@ MonoBehaviour:
   playerBoat: {fileID: 0}
   boat: {fileID: 2777132152930397205}
   currentState: 0
+  floatingTextPrefab: {fileID: 2636559501705731009, guid: 387ebec0b0483ad46b999833a30d9d3f, type: 3}
 --- !u!1 &6513007424013686884
 GameObject:
   m_ObjectHideFlags: 0

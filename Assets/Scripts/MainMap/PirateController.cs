@@ -8,11 +8,14 @@ public class PirateController : MonoBehaviour
     public Boat boat;
     public float agentSpeedMultiplier = 0.1f;
 
+    public GameObject floatingTextPrefab; // Assign your FloatingText prefab here
+    private GameObject floatingTextInstance;
+
     private PlayerController player;
     private NavMeshAgent agent;
 
     private Vector2 patrolTarget;
-    private float patrolRadius = 5.0f;  // How far away patrol points can be
+    private float patrolRadius = 8.0f;  // How far away patrol points can be
     private float patrolCooldown = 5.0f;  // Time before setting a new patrol point
     private float patrolTimer;
 
@@ -27,7 +30,18 @@ public class PirateController : MonoBehaviour
 
         SetNewPatrolTarget();  // Initialize first patrol point
 
-        SetVisibility(Vector2.Distance(transform.position, player.transform.position));
+        // Instantiate the floating text
+        floatingTextInstance = Instantiate(floatingTextPrefab);
+        
+        // Set the target (enemy boat) to follow
+        FloatingTextController floatingTextController = floatingTextInstance.GetComponent<FloatingTextController>();
+        floatingTextController.SetTarget(transform);
+
+        // Optional: Set custom text (e.g., health, name, etc.)
+        floatingTextController.SetText("Level "+boat.baseStats.level.ToString());
+        floatingTextController.transform.SetParent(transform.parent);
+
+        // SetVisibility(Vector2.Distance(transform.position, player.transform.position));
     }
 
     // Update is called once per frame
@@ -36,6 +50,9 @@ public class PirateController : MonoBehaviour
         agent.speed = boat.boatStats.speed * agentSpeedMultiplier;
         patrolTimer -= Time.deltaTime;
 
+        if (player == null){
+            player = GameObject.Find("PlayerBoat").GetComponent<PlayerController>();
+        }
         float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
 
         // Chase player if within chase threshold
@@ -48,9 +65,18 @@ public class PirateController : MonoBehaviour
             Patrol();
         }
 
-        SetVisibility(distanceToPlayer);
+        // SetVisibility(distanceToPlayer);
 
         TurnTowardsMovement();
+    }
+
+    void OnDestroy()
+    {
+        // Destroy floating text when the boat is destroyed
+        if (floatingTextInstance != null)
+        {
+            Destroy(floatingTextInstance);
+        }
     }
 
     private void Patrol()

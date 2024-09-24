@@ -58,6 +58,12 @@ public class BattleBoat: MonoBehaviour
         RotateToMovementDirection();
     }
 
+    public void SetBoatStats(ScriptableBoatStats stats){
+        scriptableBoatStats = stats;
+        boatStats = stats.baseStats;
+        boatStats.speed = stats.baseStats.speed + (boatStats.maxWeight - boatStats.weight)/(2*boatStats.maxWeight);
+    }
+
     void RotateToMovementDirection()
     {
         // Get the current velocity vector of the Rigidbody2D
