@@ -22,6 +22,6 @@ MonoBehaviour:
     weight: 0
     cooldown: 1
   level: 2
-  lootable_gold: 150
+  lootable_gold: 300
   num_ships: 3
   boatPrefab: {fileID: 4654083688597509747, guid: 60646df41e6e2784193a8124391d49b4, type: 3}
