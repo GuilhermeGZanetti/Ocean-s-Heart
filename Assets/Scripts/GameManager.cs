@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -32,12 +30,13 @@ public class GameManager : MonoBehaviour
 
     public BattleSceneData battleSceneData = null;
 
-    public void LoadBattle(MapSceneManager mapSceneManager, BoatStats playerStats, ScriptableBoatStats[] enemiesStats){
+    public void LoadBattle(MapSceneManager mapSceneManager, Boat playerStats, ScriptableBoatStats[] enemiesStats){
 
         // Load data to be passed to battlescene
         Instance.battleSceneData = new BattleSceneData
         {
-            playerStats = playerStats,
+            playerStats = playerStats.boatStats,
+            baseStats = playerStats.baseStats.baseStats,
             enemiesStats = enemiesStats
         };
         Instance.mapSceneManager = mapSceneManager;
@@ -60,6 +59,11 @@ public class GameManager : MonoBehaviour
         // Reactivate MapScene SceneManager game object
         Instance.mapSceneManager.gameObject.SetActive(true);
         Instance.mapSceneManager.ReturnFromBattle(mapSceneData);        
+    }
+
+    public void ReestartGame(){
+        // Start new Map scene
+        SceneManager.LoadScene(SceneNames.MainMap.ToString());
     }
 }
 

@@ -27,6 +27,15 @@ public class FloatingTextController : MonoBehaviour
             // Set the position of the text to follow the boat
             Vector3 screenPos = target.position + offset;
             transform.position = screenPos;
+
+            PirateController pirate = target.GetComponent<PirateController>();
+            if (pirate){
+                if (pirate.isVisible){
+                    floatingText.gameObject.SetActive(true);
+                } else {
+                    floatingText.gameObject.SetActive(false);
+                }
+            }
         }
     }
 

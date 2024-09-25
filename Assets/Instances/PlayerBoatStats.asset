@@ -18,9 +18,10 @@ MonoBehaviour:
     manuverability: 5
     num_canons: 1
     maxWeight: 10
-    visibility: 4
+    visibility: 3
     weight: 0
     cooldown: 1
+  level: 0
   lootable_gold: 0
   num_ships: 1
   boatPrefab: {fileID: 0}

@@ -13,6 +13,7 @@ public class BattleSceneManager : MonoBehaviour
 
 
     private float looted_gold = 0;
+    private bool updatedPlayerStats = false;
 
     // Start is called before the first frame update
     void Start()
@@ -43,7 +44,10 @@ public class BattleSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (!updatedPlayerStats){
+            player.SetBoatStats(battleSceneData.playerStats, battleSceneData.baseStats);
+            updatedPlayerStats = true;
+        }
     }
 
     public void BoatDestroyed(GameObject destroyedBoat){

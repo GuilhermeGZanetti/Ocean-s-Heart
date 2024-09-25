@@ -33,6 +33,7 @@ public class BattlePlayerController : MonoBehaviour
         return boat.boatStats;
     }
 
-
-
+    public void SetBoatStats(BoatStats stats, BoatStats baseStats){
+        boat.SetBoatStats(stats, baseStats);
+    }
 }

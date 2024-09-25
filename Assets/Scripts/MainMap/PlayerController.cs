@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private MapSceneManager mapSceneManager;
 
     private GameObject targetGameObject = null;
+    private bool isSafeInCity = false;
+    private float totalGoldRun = 0f;
 
 
     // Start is called before the first frame update
@@ -26,6 +28,7 @@ public class PlayerController : MonoBehaviour
     void Update(){
         agent.speed = boat.boatStats.speed * agentSpeedMultiplier;
         if (Input.GetMouseButtonDown(0)){
+            isSafeInCity = false;
             targetGameObject = null;
             //Check if clicked on a tilemap
             RaycastHit2D hit = Physics2D.GetRayIntersection(cam.ScreenPointToRay(Input.mousePosition), 100f);
@@ -65,8 +68,9 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Entered Trigger");
         PirateController pirate = hitInfo.GetComponent<PirateController>();
+        City city = hitInfo.GetComponent<City>();
 
-        if (pirate){
+        if (pirate && !isSafeInCity){
             Debug.Log("Pirate Found");
             int num_enemies = pirate.boat.baseStats.num_ships;
             ScriptableBoatStats[] enemiesStats = new ScriptableBoatStats[num_enemies];
@@ -77,7 +81,11 @@ public class PlayerController : MonoBehaviour
             Destroy(pirate.gameObject);
 
             // Load the battle scene
-            GameManager.Instance.LoadBattle(mapSceneManager, boat.boatStats, enemiesStats);
+            GameManager.Instance.LoadBattle(mapSceneManager, boat, enemiesStats);
+        } else if (city){
+            Debug.Log("Entered city");
+            isSafeInCity = true;
+            mapSceneManager.EnterCity(city);
         }
 
     }
@@ -97,7 +105,25 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void GetGold(int amount){
+    public void GainGold(int amount){
         boat.gold += amount;
+        totalGoldRun += amount;
     }
+
+    public void PayGold(int amount){
+        if (amount > boat.gold){
+            Debug.LogError("Not enough gold");
+        }
+        boat.gold -= amount;
+    }
+
+    public int GetPlayerGold(){
+        return (int)boat.gold;
+    }
+
+    public int GetTotalGoldRun(){
+        return (int)totalGoldRun;
+    }
+
+    public bool IsSafeInCity(){ return isSafeInCity; }
 }

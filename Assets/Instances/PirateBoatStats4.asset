@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: PirateBoatStats4
   m_EditorClassIdentifier: 
   baseStats:
-    hp: 150
+    hp: 300
     speed: 0.7
-    manuverability: 3
-    num_canons: 4
+    manuverability: 7
+    num_canons: 3
     maxWeight: 10
     visibility: 1
     weight: 0
     cooldown: 1
-  level: 1
+  level: 4
   lootable_gold: 400
   num_ships: 1
   boatPrefab: {fileID: 4654083688597509747, guid: 60646df41e6e2784193a8124391d49b4, type: 3}

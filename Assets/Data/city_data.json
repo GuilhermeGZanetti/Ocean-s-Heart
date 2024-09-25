@@ -33,6 +33,57 @@
                 "wood": 5,
                 "grain": 20
             }
+        },
+        {
+            "cityName": "Turiama",
+            "inventory": {
+                "iron": 15, 
+                "cotton": 10, 
+                "silk": 10, 
+                "wood": 60, 
+                "grain": 40
+            },
+            "basePrice": {
+                "iron": 60,
+                "cotton": 30, 
+                "silk": 70,
+                "wood": 5,
+                "grain": 20
+            }
+        },
+        {
+            "cityName": "Bras",
+            "inventory": {
+                "iron": 15, 
+                "cotton": 10, 
+                "silk": 10, 
+                "wood": 60, 
+                "grain": 40
+            },
+            "basePrice": {
+                "iron": 60,
+                "cotton": 30, 
+                "silk": 70,
+                "wood": 5,
+                "grain": 20
+            }
+        },
+        {
+            "cityName": "Gren",
+            "inventory": {
+                "iron": 15, 
+                "cotton": 10, 
+                "silk": 10, 
+                "wood": 60, 
+                "grain": 40
+            },
+            "basePrice": {
+                "iron": 60,
+                "cotton": 30, 
+                "silk": 70,
+                "wood": 5,
+                "grain": 20
+            }
         }
     ]
 }

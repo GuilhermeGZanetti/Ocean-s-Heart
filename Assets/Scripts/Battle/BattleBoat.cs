@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.UI;
 using UnityEngine;
 
 public class BattleBoat: MonoBehaviour
@@ -62,6 +61,11 @@ public class BattleBoat: MonoBehaviour
         scriptableBoatStats = stats;
         boatStats = stats.baseStats;
         boatStats.speed = stats.baseStats.speed + (boatStats.maxWeight - boatStats.weight)/(2*boatStats.maxWeight);
+    }
+    public void SetBoatStats(BoatStats stats, BoatStats baseStats){
+        scriptableBoatStats = Instantiate(scriptableBoatStats);
+        scriptableBoatStats.baseStats = baseStats;
+        boatStats = stats;
     }
 
     void RotateToMovementDirection()

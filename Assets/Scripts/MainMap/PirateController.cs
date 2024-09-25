@@ -7,6 +7,7 @@ public class PirateController : MonoBehaviour
 {
     public Boat boat;
     public float agentSpeedMultiplier = 0.1f;
+    public bool isVisible = false;
 
     public GameObject floatingTextPrefab; // Assign your FloatingText prefab here
     private GameObject floatingTextInstance;
@@ -41,7 +42,7 @@ public class PirateController : MonoBehaviour
         floatingTextController.SetText("Level "+boat.baseStats.level.ToString());
         floatingTextController.transform.SetParent(transform.parent);
 
-        // SetVisibility(Vector2.Distance(transform.position, player.transform.position));
+        SetVisibility(Vector2.Distance(transform.position, player.transform.position));
     }
 
     // Update is called once per frame
@@ -56,7 +57,7 @@ public class PirateController : MonoBehaviour
         float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
 
         // Chase player if within chase threshold
-        if (distanceToPlayer <= boat.boatStats.visibility)
+        if ((distanceToPlayer <= boat.boatStats.visibility) && !player.IsSafeInCity())
         {
             ChasePlayer();
         }
@@ -65,7 +66,7 @@ public class PirateController : MonoBehaviour
             Patrol();
         }
 
-        // SetVisibility(distanceToPlayer);
+        SetVisibility(distanceToPlayer);
 
         TurnTowardsMovement();
     }
@@ -126,6 +127,11 @@ public class PirateController : MonoBehaviour
     {
         // Get the maximum visibility range from the player's boat stats
         float maxVisibility = player.boat.boatStats.visibility;
+        if (distanceToPlayer > maxVisibility){
+            isVisible = false;
+        } else {
+            isVisible = true;
+        }
         
         // Calculate the transparency based on the distance
         float transparencyFactor = Mathf.Clamp01(1.0f - Mathf.Pow((distanceToPlayer / maxVisibility), 3.0f));
